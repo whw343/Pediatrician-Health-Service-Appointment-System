@@ -1,23 +1,33 @@
-public class HealthProfessional {
-    private int id;
-    private String name;
+// HealthProfessional.java
+// Author: Felix
+// Base class for all healthcare professionals
 
-    // 默认构造函数
+public class HealthProfessional {
+    // =============================
+    // 🔹 Fields (Encapsulation)
+    // =============================
+    private int id;           // unique identifier for doctor
+    private String name;      // doctor's full name
+
+    // =============================
+    // 🔹 Constructors (Overloading)
+    // =============================
+
+    // Default constructor
     public HealthProfessional() {
+        this.id = 0;
+        this.name = "Unknown";
     }
 
-    // 带参数的构造函数
+    // Parameterized constructor
     public HealthProfessional(int id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    // 打印健康专业人员信息
-    public void printDetails() {
-        System.out.println("ID: " + id + ", Name: " + name);
-    }
-
-    // Getter 和 Setter
+    // =============================
+    // 🔹 Getters and Setters
+    // =============================
     public int getId() {
         return id;
     }
@@ -33,5 +43,20 @@ public class HealthProfessional {
     public void setName(String name) {
         this.name = name;
     }
-}
 
+    // =============================
+    // 🔹 Display Method (Polymorphism)
+    // =============================
+    public void printDetails() {
+        System.out.println("Doctor Details:");
+        System.out.println("ID: " + id + ", Name: " + name);
+    }
+
+    // =============================
+    // 🔹 Utility Method (for clarity)
+    // =============================
+    @Override
+    public String toString() {
+        return "HealthProfessional[ID=" + id + ", Name=" + name + "]";
+    }
+}
