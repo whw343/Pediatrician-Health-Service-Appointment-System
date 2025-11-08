@@ -1,37 +1,38 @@
-import java.util.ArrayList; // 导入 ArrayList 类
-
 public class AppointmentSystem {
     public static void main(String[] args) {
-        // 创建医生对象
-        GeneralPractitioner gp1 = new GeneralPractitioner(1, "Dr. Smith", "General Health");
-        Pediatrician pediatrician1 = new Pediatrician(2, "Dr. Brown", "Child Growth & Development");
+        System.out.println("==== Health Service Appointment System ====\n");
 
-        // 创建预约列表
-        ArrayList<Appointment> appointments = new ArrayList<>();
+        // Step 1: 创建医生对象
+        HealthProfessional doc1 = new GeneralPractitioner(1, "Dr. Smith", "General Health");
+        HealthProfessional doc2 = new Pediatrician(2, "Dr. Brown", "Child Growth & Development");
 
-        // 创建并添加预约
-        appointments.add(new Appointment("John Doe", "123456789", "09:00 AM", gp1));
-        appointments.add(new Appointment("Jane Doe", "987654321", "10:00 AM", pediatrician1));
+        // Step 2: 创建预约系统
+        AppointmentManager manager = new AppointmentManager();
 
-        // 打印所有预约
-        System.out.println("All Appointments:");
-        for (Appointment appointment : appointments) {
-            appointment.printAppointmentDetails();
-            System.out.println("------------------------------");
-        }
+        // Step 3: 创建并添加预约
+        System.out.println("Creating appointments...\n");
+        Appointment appt1 = new Appointment("John Doe", "123456789", "09:00 AM", doc1);
+        Appointment appt2 = new Appointment("Jane Doe", "987654321", "10:00 AM", doc2);
+        manager.addAppointment(appt1);
+        manager.addAppointment(appt2);
 
-        // 取消预约（按手机号取消）
-        cancelAppointment(appointments, "123456789");
-        System.out.println("Appointments after cancellation:");
-        for (Appointment appointment : appointments) {
-            appointment.printAppointmentDetails();
-            System.out.println("------------------------------");
-        }
-    }
+        // Step 4: 打印所有预约
+        System.out.println("\nAll Appointments:");
+        manager.printAppointments();
 
-    // 取消预约
-    public static void cancelAppointment(ArrayList<Appointment> appointments, String phone) {
-        appointments.removeIf(appointment -> appointment.getPatientPhone().equals(phone));
-        System.out.println("Appointment with phone " + phone + " has been cancelled.");
+        // Step 5: 取消一个预约
+        System.out.println("\nCancelling appointment with phone 123456789...");
+        manager.cancelAppointmentByPhone("123456789");
+
+        // Step 6: 打印剩余预约
+        System.out.println("\nAppointments after cancellation:");
+        manager.printAppointments();
+
+        // Step 7: 测试取消不存在的预约
+        System.out.println("\nAttempting to cancel a non-existing appointment...");
+        manager.cancelAppointmentByPhone("555555555");
+
+        // Step 8: 结束测试
+        System.out.println("\n==== End of Test ====");
     }
 }
